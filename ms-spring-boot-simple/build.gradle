@@ -3,6 +3,7 @@ buildscript {
 		springBootVersion = '1.5.2.RELEASE'
 	}
 	repositories {
+	    maven { url "http://nexus.cfaoe.com/nexus/content/groups/public/" }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
 		mavenCentral()
 	}
@@ -19,8 +20,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    maven { url "http://nexus.cfaoe.com/nexus/content/groups/public/" }
 	maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+	mavenCentral()
 }
 
 
