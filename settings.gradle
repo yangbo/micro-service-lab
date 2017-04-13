@@ -1,1 +1,4 @@
-include "ms-spring-boot-simple", "ms-spring-cloud-user-provider"
+include \
+	"spring-boot-simple", \
+	"spring-cloud-service-user", \
+	"spring-cloud-service-registry"
