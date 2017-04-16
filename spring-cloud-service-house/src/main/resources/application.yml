@@ -1,0 +1,26 @@
+server:
+  port: 8010
+  
+spring:
+  jpa:
+    generate-ddl: false    # 让jpa不要在启动时自动根据entity创建表
+    show-sql: true
+    hibernate:
+      ddl-auto: none       # 让 hibernate 不要在启动时删除、创建表
+      
+  datasource:
+    platform: h2
+    schema:
+    - classpath:schema.sql
+    data:
+    - classpath:data.sql
+    
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    # 显示 sql 语句的参数
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: trace
+    # 应用日志级别
+    org.yangbo: debug
