@@ -19,8 +19,8 @@ public class HouseInvestComputer {
 		return netROI;
 	}
 	
-	/** 实际年投资回报率 **/
-	public double computeActualReturnOnInvestPerYear(InvestContext investContext) {
+	/** 实际年投资回报率(gross) **/
+	public double computeGrossReturnOnInvestPerYear(InvestContext investContext) {
 		double totalIncome = (investContext.getSellPrice() - investContext.getBuyPrice())*investContext.getTotalArea();
 		double grossROI = totalIncome / computeTotalCost(investContext);
 		double yearGrossROI = grossROI/investContext.getHoldYears();
@@ -184,5 +184,13 @@ public class HouseInvestComputer {
 	 */
 	public double computeFirstPay(InvestContext investContext) {
 		return investContext.getBuyPrice() * investContext.getTotalArea() * investContext.getFirstPayRate();
+	}
+
+	/** 净年投资回报率 */
+	public double computeNetReturnOnInvestPerYear(InvestContext investContext) {
+		double netProfit = computeNetProfit(investContext);
+		double netROI = netProfit / computeTotalCost(investContext);
+		double yearNetROI = netROI/investContext.getHoldYears();
+		return yearNetROI;
 	}
 }

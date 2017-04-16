@@ -17,8 +17,12 @@ public class HouseController {
 		return "房产投资计算器";
 	}
 
+	/**
+	 * sample A - http://localhost:8010/roi?buyPrice=5000&sellPrice=7000&totalArea=93&holdYears=3&firstPayRate=1
+	 */
 	@GetMapping("/roi")
-	public String returnOfInvest(Double sellPrice, Double buyPrice, Double holdYears, Double totalArea) {
+	public String returnOfInvest(Double sellPrice, Double buyPrice, Double holdYears, Double totalArea,
+			Double firstPayRate) {
 		
 		InvestContext investContext = new InvestContext();
 		
@@ -34,23 +38,29 @@ public class HouseController {
 		if (totalArea != null){
 			investContext.setTotalArea(totalArea);
 		}
+		if (firstPayRate != null){
+			investContext.setFirstPayRate(firstPayRate);
+		}
 		
 		double roi = investComputer.computeReturnRatePerYear(investContext);
-		double actualRoi = investComputer.computeActualReturnOnInvestPerYear(investContext);
-		double netReturn = investComputer.computeNetProfit(investContext);
+		double grossProfit = investComputer.computeGrossProfit(investContext);
+		double netProfit = investComputer.computeNetProfit(investContext);
 		double firstPay = investComputer.computeFirstPay(investContext);
+		double grossROI = investComputer.computeGrossReturnOnInvestPerYear(investContext);
+		double netROI = investComputer.computeNetReturnOnInvestPerYear(investContext);
 		double totalInvest = investComputer.computeTotalCost(investContext);
-		double grossReturn = investComputer.computeGrossProfit(investContext);
 		
 		String response = String.format("投资信息: <br/>%s:"
 				+ "<p> 总投资 = %.2f 元</p>"
 				+ "<p> 毛利润 = %.2f 元</p>"
-				+ "<p> 净收益 = %.2f 元"
-				+ "<p> 实际年投资回报率 = %.2f%%</p>"
+				+ "<p> 净利润 = %.2f 元"
+				+ "<p> 年投资回报率(net) = %.2f%%</p>"
+				+ "<p> 年投资回报率(gross) = %.2f%%</p>"
 				+ "<p> 首付 = %.2f 元 </p>"
 				+ "<p> 无贷款年投资回报率 = %.2f%%</p>"
 				, 
-				investContext, totalInvest, grossReturn, netReturn, actualRoi*100, firstPay, roi*100);
+				investContext, totalInvest, grossProfit, netProfit, 
+				netROI*100, grossROI*100, firstPay, roi*100);
 		return response;
 	}
 }
