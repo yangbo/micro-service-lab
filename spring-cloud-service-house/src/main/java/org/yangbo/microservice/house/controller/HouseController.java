@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yangbo.microservice.house.HouseInvestComputer;
+import org.yangbo.microservice.house.domain.HousePrice;
 import org.yangbo.microservice.house.domain.InvestContext;
 
 @RestController
@@ -62,5 +63,14 @@ public class HouseController {
 				investContext, totalInvest, grossProfit, netProfit, 
 				netROI*100, grossROI*100, firstPay, roi*100);
 		return response;
+	}
+	
+	@GetMapping("/predicate")
+	public HousePrice predicate(Double currentPrice, Double increasePerYear) {
+		HousePrice housePrice = new HousePrice();
+		housePrice.setCurrentPrice(currentPrice);
+		housePrice.setIncreasePerYear(increasePerYear);
+		
+		return housePrice;
 	}
 }
