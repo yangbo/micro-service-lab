@@ -1,0 +1,12 @@
+
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+	compile project(":transaction-commander-client")
+	
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile ('com.alibaba:fastjson:1.1.26')
+	runtime('com.h2database:h2')
+}
